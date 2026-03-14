@@ -130,6 +130,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="OutputGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxProbabilityContainer" unique_id=46728974]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxProbabilityContainer/OutputGrid" unique_id=1083179171]
@@ -157,6 +158,13 @@ layout_mode = 2
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="OutputLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxProbabilityContainer" unique_id=481756799]
+layout_mode = 2
+text = "Mission Level:
+Defficit:
+Probability of Success:
+"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1754189681]
 visible = false

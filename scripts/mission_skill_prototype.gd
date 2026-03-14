@@ -6,6 +6,12 @@ var hero_skills_dict: Dictionary[String, int] = {}
 var hero_skills_input_dict: Dictionary[String, SpinBox] = {}
 var mission_difficulty_dict: Dictionary[String, int] = {}
 var mission_difficulty_input_dict: Dictionary[String, SpinBox] = {}
+
+var difference_lable_dict: Dictionary[String, Label] = {}
+
+@onready var outputLabel: Label = $MarginContainer/VBoxContainer/HBoxProbabilityContainer/OutputLabel
+var outputTextTemplate: String = "Mission Level: %.1f\nDeficit: %.1f\nProbability of Success: %.1f%s"
+
 func _ready() -> void:
     #var skills_dict: Dictionary = generate_skill_spread(SKILLS_LIST, 10)
     
@@ -20,7 +26,9 @@ func _ready() -> void:
     $MarginContainer/VBoxContainer/HBoxContainer.add_child(input_grid)
     
     var output_grid: GridContainer = generate_output_grid(SKILLS_LIST)
+    $MarginContainer/VBoxContainer/HBoxProbabilityContainer.add_child(output_grid)
     
+    update_output_labels()
     
     # connect signals
     for key in hero_skills_input_dict:
@@ -29,22 +37,31 @@ func _ready() -> void:
     for key in mission_difficulty_input_dict:
         mission_difficulty_input_dict[key].value_changed.connect(update_mission_difficulty_dict)
 
+func calc_dict_sum(dict: Dictionary) -> float:
+    var sum: float = 0
+    for key in dict.keys():
+        sum += dict[key]
+    return sum 
+
 
 func calc_percent_success(skills_dict: Dictionary, mission_dict: Dictionary) -> float:
-    var count_uncovered: int = 0
-    var mission_level: int = 0
+    var count_uncovered: float = calc_uncovered(skills_dict, mission_dict)
+    var mission_level: float = calc_dict_sum(mission_dict)
     
+    if mission_level <= 0:
+        return 100
+    else:
+        return (1 - count_uncovered/mission_level) * 100
+    
+func calc_uncovered(skills_dict: Dictionary, mission_dict: Dictionary) -> float:
+    var count_uncovered: float = 0
     for skill in mission_dict.keys():
-        mission_level += mission_dict[skill] 
         if mission_dict[skill] - skills_dict[skill] > 0:
             count_uncovered += mission_dict[skill] - skills_dict[skill]
-    #print_debug(str(count_uncovered) + "/" + str(mission_level))
-    if mission_level <= 0:
-        return 1
-    else:
-        return 1 - count_uncovered/float(mission_level)
+            
+    return count_uncovered
     
-    
+
 func generate_skill_spread(skills_list: Array[String], level: int) -> Dictionary:
     var return_dict: Dictionary = {}
     
@@ -67,7 +84,7 @@ func print_mission_output(skills_dict: Dictionary, mission_dict: Dictionary):
     # 1.0 = 100% chance of success. 0 = 0% cance of sucess
     var percent_success: float = calc_percent_success(skills_dict, mission_dict)
     
-    print_debug(str(percent_success * 100) + "% chance sucess")
+    print_debug(str(percent_success) + "% chance sucess")
 
 
 func generate_input_grid(skills_list: Array[String]) -> GridContainer:
@@ -124,6 +141,23 @@ func generate_output_grid(skills_list: Array[String]) -> GridContainer:
         skill_label.text = skill
         return_contriner.add_child(skill_label)
     
+    # Difference
+    var diff_row_label: Label = Label.new()
+    diff_row_label.text = "Diff"
+    return_contriner.add_child(diff_row_label)
+    for skill in skills_list:
+        var diff_label: Label = Label.new()
+        # TODO maybe have skills be floats? for easy fractional mult ex x1.5
+        var diff: int = hero_skills_dict[skill] - mission_difficulty_dict[skill]
+        diff_label.text = str(diff)
+        return_contriner.add_child(diff_label)
+        difference_lable_dict[skill] = diff_label
+        
+    
+    # Bars
+    #for skill in skills_list:
+        
+    
     return return_contriner
     
     
@@ -134,13 +168,27 @@ func init_dict_keys_to_0(keys:Array[String]) -> Dictionary[String, int]:
     return return_dict
 
 
+func update_diff_labels():
+    for key in difference_lable_dict.keys():
+        difference_lable_dict[key].text = str(hero_skills_dict[key] - mission_difficulty_dict[key])
+
 func update_hero_skill_dict(_value):
     for skill in hero_skills_dict:
         hero_skills_dict[skill] = hero_skills_input_dict[skill].value
     print_mission_output(hero_skills_dict, mission_difficulty_dict)
-
+    update_output_labels()
 
 func update_mission_difficulty_dict(_value):
     for skill in mission_difficulty_dict:
         mission_difficulty_dict[skill] = mission_difficulty_input_dict[skill].value
-        print_mission_output(hero_skills_dict, mission_difficulty_dict)
+    print_mission_output(hero_skills_dict, mission_difficulty_dict)
+    update_output_labels()
+
+func update_output_labels():
+    update_diff_labels()
+    outputLabel.text = outputTextTemplate % [
+        calc_dict_sum(mission_difficulty_dict), 
+        calc_uncovered(hero_skills_dict, mission_difficulty_dict), 
+        calc_percent_success(hero_skills_dict, mission_difficulty_dict),
+        "%"
+    ]
