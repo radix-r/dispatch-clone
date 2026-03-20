@@ -153,11 +153,13 @@ layout_mode = 2
 text = "Tutorial"
 
 [node name="skillTitleLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxSingleSkill" unique_id=1222857535]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Skill: %s"
 
 [node name="SkilDiffLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxSingleSkill" unique_id=1642829275]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Diff: #"
 

@@ -47,7 +47,8 @@ func _ready() -> void:
     # single skill buttons
     for key in single_skill_checkbox_dict:
         single_skill_checkbox_dict[key].pressed.connect(on_single_skill_button_pressed.bind(key))
-        
+
+
 func calc_dict_sum(dict: Dictionary) -> float:
     var sum: float = 0
     for key in dict.keys():
@@ -187,11 +188,15 @@ func init_dict_keys_to_0(keys:Array[String]) -> Dictionary[String, int]:
 
 func on_single_skill_button_pressed(skill: String):
     # if button clicked and already on, toggle off
-    print_debug(single_skill_checkbox_dict[skill].name + " Prev: " + str(single_skill_checkbox_prev_dict[skill]) + " Current: " + str(single_skill_checkbox_dict[skill].button_pressed))
+    #print_debug(single_skill_checkbox_dict[skill].name + " Prev: " + str(single_skill_checkbox_prev_dict[skill]) + " Current: " + str(single_skill_checkbox_dict[skill].button_pressed))
     if single_skill_checkbox_prev_dict[skill]:
         single_skill_checkbox_dict[skill].button_pressed = false
+    # need to set all other prev to false
+    for key in single_skill_checkbox_prev_dict:
+        single_skill_checkbox_prev_dict[key] = false
     single_skill_checkbox_prev_dict[skill] = single_skill_checkbox_dict[skill].button_pressed
-
+    
+    update_single_skill_output(skill)
 
 func update_diff_labels():
     for key in difference_lable_dict.keys():
@@ -217,3 +222,9 @@ func update_output_labels():
         calc_percent_success(hero_skills_dict, mission_difficulty_dict),
         "%"
     ]
+
+
+func update_single_skill_output(skill: String):
+    %skillTitleLabel.text = "Skill: " + skill
+    %SkilDiffLabel.text = "Diff: " + str(hero_skills_dict[skill] - mission_difficulty_dict[skill])
+    
