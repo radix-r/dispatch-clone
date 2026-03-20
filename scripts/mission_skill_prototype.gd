@@ -6,6 +6,9 @@ var hero_skills_dict: Dictionary[String, int] = {}
 var hero_skills_input_dict: Dictionary[String, SpinBox] = {}
 var mission_difficulty_dict: Dictionary[String, int] = {}
 var mission_difficulty_input_dict: Dictionary[String, SpinBox] = {}
+var single_skill_checkbox_dict: Dictionary[String, CheckBox] = {}
+# Brevious state of button. used to toggle off if in on state
+var single_skill_checkbox_prev_dict: Dictionary[String, bool] = {}
 
 var difference_lable_dict: Dictionary[String, Label] = {}
 
@@ -22,11 +25,16 @@ func _ready() -> void:
     hero_skills_dict = init_dict_keys_to_0(SKILLS_LIST)
     mission_difficulty_dict = init_dict_keys_to_0(SKILLS_LIST)
     
+
+    
     var input_grid: GridContainer = generate_input_grid(SKILLS_LIST)
     $MarginContainer/VBoxContainer/HBoxContainer.add_child(input_grid)
     
     var output_grid: GridContainer = generate_output_grid(SKILLS_LIST)
     $MarginContainer/VBoxContainer/HBoxProbabilityContainer.add_child(output_grid)
+    
+    #var heroSkillChart: Chart = Chart.new()
+    
     
     update_output_labels()
     
@@ -36,7 +44,10 @@ func _ready() -> void:
     # Should have same keys. Can prob do at same time
     for key in mission_difficulty_input_dict:
         mission_difficulty_input_dict[key].value_changed.connect(update_mission_difficulty_dict)
-
+    # single skill buttons
+    for key in single_skill_checkbox_dict:
+        single_skill_checkbox_dict[key].pressed.connect(on_single_skill_button_pressed.bind(key))
+        
 func calc_dict_sum(dict: Dictionary) -> float:
     var sum: float = 0
     for key in dict.keys():
@@ -124,7 +135,14 @@ func generate_input_grid(skills_list: Array[String]) -> GridContainer:
     var checkbox_label = Label.new()
     checkbox_label.text = "Single Skill Check"
     return_contriner.add_child(checkbox_label)
-    
+    var single_skill_button_group: ButtonGroup = ButtonGroup.new() 
+    for skill in skills_list:
+        var checkbox: CheckBox = CheckBox.new()
+        checkbox.button_group = single_skill_button_group
+        single_skill_checkbox_dict[skill] = checkbox
+        return_contriner.add_child(checkbox)
+        single_skill_checkbox_prev_dict[skill] = checkbox.button_pressed
+        
     return return_contriner
     
 
@@ -166,6 +184,13 @@ func init_dict_keys_to_0(keys:Array[String]) -> Dictionary[String, int]:
     for key in keys:
         return_dict[key] = 0
     return return_dict
+
+func on_single_skill_button_pressed(skill: String):
+    # if button clicked and already on, toggle off
+    print_debug(single_skill_checkbox_dict[skill].name + " Prev: " + str(single_skill_checkbox_prev_dict[skill]) + " Current: " + str(single_skill_checkbox_dict[skill].button_pressed))
+    if single_skill_checkbox_prev_dict[skill]:
+        single_skill_checkbox_dict[skill].button_pressed = false
+    single_skill_checkbox_prev_dict[skill] = single_skill_checkbox_dict[skill].button_pressed
 
 
 func update_diff_labels():
