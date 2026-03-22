@@ -105,6 +105,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="HBoxProbabilityContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=678605835]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="OutputGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxProbabilityContainer" unique_id=46728974]
@@ -165,6 +166,7 @@ layout_mode = 2
 text = "Diff: #"
 
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxSingleSkill" unique_id=91271850]
+visible = false
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0.7882353, 0, 1)
 theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
@@ -172,3 +174,12 @@ theme_override_colors/checkbox_checked_color = Color(0, 1, 0, 1)
 theme_override_colors/checkbox_unchecked_color = Color(18.892157, 0, 0, 1)
 button_group = SubResource("ButtonGroup_fsoqw")
 icon = ExtResource("3_fsoqw")
+
+[node name="VBoxSingleSkillChart" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxSingleSkill" unique_id=247917899]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxSingleSkillChart" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1579461854]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3

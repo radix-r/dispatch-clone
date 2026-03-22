@@ -15,19 +15,27 @@ var difference_lable_dict: Dictionary[String, Label] = {}
 @onready var outputLabel: Label = $MarginContainer/VBoxContainer/HBoxProbabilityContainer/OutputLabel
 var outputTextTemplate: String = "Mission Level: %.1f\nDeficit: %.1f\nProbability of Success: %.1f%s"
 
+@onready var single_skill_hbox: HBoxContainer = %HBoxSingleSkill
+var single_skill_success_function: Function
+var single_skill_mixed_function: Function
+var single_skill_fail_function: Function
+
+var SUCCESS_INDEX: int = 0
+var MIXED_INDEX: int = 1
+var FAIL_INDEX: int = 2
+
 var single_skill_selected: String = ""
+var chart_scene: PackedScene = load("res://addons/easy_charts/control_charts/chart.tscn")
+var single_skill_chart: Chart
+
 
 func _ready() -> void:
     #var skills_dict: Dictionary = generate_skill_spread(SKILLS_LIST, 10)
     
     #var mission_dict: Dictionary = generate_skill_spread(SKILLS_LIST, 10)
-    
-    
 
     hero_skills_dict = init_dict_keys_to_0(SKILLS_LIST)
     mission_difficulty_dict = init_dict_keys_to_0(SKILLS_LIST)
-    
-
     
     var input_grid: GridContainer = generate_input_grid(SKILLS_LIST)
     $MarginContainer/VBoxContainer/HBoxContainer.add_child(input_grid)
@@ -35,8 +43,56 @@ func _ready() -> void:
     var output_grid: GridContainer = generate_output_grid(SKILLS_LIST)
     $MarginContainer/VBoxContainer/HBoxProbabilityContainer.add_child(output_grid)
     
-    #var heroSkillChart: Chart = Chart.new()
+    single_skill_chart = chart_scene.instantiate()
+    single_skill_success_function = Function.new(
+        [SUCCESS_INDEX],
+        [1],
+        "Success Probability",
+        {
+            type = Function.Type.BAR,
+            bar_size = 5,
+            color = Color("00981fff"),
+            marker = Function.Marker.CIRCLE,
+        }
+    )
     
+    single_skill_mixed_function = Function.new(
+        [0,MIXED_INDEX],
+        [0,.5],
+        "Mixed Probability",
+        {
+            type = Function.Type.BAR,
+            bar_size = 5,
+            color = Color("d5b400ff"),
+            marker = Function.Marker.CIRCLE
+        }
+    )
+    
+    single_skill_fail_function = Function.new(
+        [0,0,FAIL_INDEX],
+        [0,0,.25],
+        "Fail Probability",
+        {
+            type = Function.Type.BAR,
+            bar_size = 5,
+            color = Color("d50000ff"),
+            marker = Function.Marker.CIRCLE
+        }
+    )
+    
+    var chart_properties := ChartProperties.new()
+    # chart_properties.x_label = ""
+    chart_properties.y_label = "Probability of Outcome"
+    chart_properties.show_x_label = false
+    chart_properties.show_tick_labels = false
+    chart_properties.title = "Single Skill Probabilities"
+    chart_properties.show_legend = true
+    chart_properties.interactive = true
+    single_skill_chart.set_x_domain(0,2)
+    single_skill_chart.set_y_domain(0,1)
+
+    %HBoxSingleSkillChart.add_child(single_skill_chart)
+    single_skill_chart.plot([single_skill_success_function, single_skill_mixed_function, single_skill_fail_function], chart_properties)
     
     update_output_labels()
     
@@ -270,9 +326,13 @@ func update_diff_labels():
         difference_lable_dict[key].text = str(hero_skills_dict[key] - mission_difficulty_dict[key])
     if single_skill_selected != "":
         %HBoxSingleSkill.show()
+        %HBoxSingleSkillChart.show()
+        %HBoxProbabilityContainer.hide()
         update_single_skill_output(single_skill_selected)
     else:
         %HBoxSingleSkill.hide()
+        %HBoxSingleSkillChart.hide()
+        %HBoxProbabilityContainer.show()
 
 
 func update_hero_skill_dict(_value):
@@ -303,4 +363,15 @@ func update_single_skill_output(skill: String):
     var diff: int = hero_skills_dict[skill] - mission_difficulty_dict[skill]
     %skillTitleLabel.text = "Skill: " + skill
     %SkilDiffLabel.text = "Diff: " + str(diff)
-    print_debug(calc_probs_single_skill(diff))
+    var probs: Array = calc_probs_single_skill(diff)
+    print_debug(probs)
+    
+    ## chart
+    
+    single_skill_success_function.set_point(SUCCESS_INDEX, SUCCESS_INDEX, probs[SUCCESS_INDEX]) 
+    single_skill_mixed_function.set_point(MIXED_INDEX, float(MIXED_INDEX), probs[MIXED_INDEX])
+    single_skill_fail_function.set_point(FAIL_INDEX, float(FAIL_INDEX), probs[FAIL_INDEX])
+    
+    single_skill_chart.queue_redraw()
+    
+    
