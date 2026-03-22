@@ -179,7 +179,7 @@ func calc_probs_single_skill(mod: int) -> Array[float]:
 
     #var int1 = randf_range(1,6)
     #var int2 = randf_range(1,6)
-    print_debug(calc_dict_sum(outcome_prob_dist_2d6)," ", count_outcomes_success, " ", count_outcomes_mixed," ", count_outcomes_fail)
+    #print_debug(calc_dict_sum(outcome_prob_dist_2d6)," ", count_outcomes_success, " ", count_outcomes_mixed," ", count_outcomes_fail)
     # Should sum to 1
     return [success_prob, mixed_prob, fail_prob]
 
@@ -364,7 +364,7 @@ func update_single_skill_output(skill: String):
     %skillTitleLabel.text = "Skill: " + skill
     %SkilDiffLabel.text = "Diff: " + str(diff)
     var probs: Array = calc_probs_single_skill(diff)
-    print_debug(probs)
+    #print_debug(probs)
     
     ## chart
     
