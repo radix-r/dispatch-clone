@@ -1,0 +1,206 @@
+[gd_scene format=3 uid="uid://b6dnxtx8rl7d5"]
+
+[ext_resource type="Script" uid="uid://ctcal18w1h3sy" path="res://scripts/night.gd" id="1_vjgo1"]
+[ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://addons/maaacks_game_template/base/nodes/utilities/capture_focus.gd" id="2_8ymxp"]
+[ext_resource type="Texture2D" uid="uid://ctfl5lq83mmic" path="res://icon.png" id="3_cgu46"]
+[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://addons/maaacks_game_template/base/nodes/utilities/pause_menu_controller.gd" id="4_cgu46"]
+[ext_resource type="PackedScene" uid="uid://bpphyypwqyoyl" path="res://addons/maaacks_game_template/examples/scenes/windows/pause_menu.tscn" id="5_b1j7a"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_fsoqw"]
+
+[node name="Night" type="Control" unique_id=974558786]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vjgo1")
+
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=312300519]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=875158694]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1880326414]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1338909239]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Night"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1476259617]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=516044591]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 32
+script = ExtResource("2_8ymxp")
+
+[node name="InputGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1102215468]
+visible = false
+layout_mode = 2
+size_flags_vertical = 0
+columns = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/InputGrid" unique_id=359316342]
+layout_mode = 2
+text = "Skill Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkillLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/InputGrid" unique_id=1056308091]
+layout_mode = 2
+text = "SkillA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/InputGrid" unique_id=465313113]
+layout_mode = 2
+text = "Hero Skill Value"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeroSkillInput" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/InputGrid" unique_id=338017849]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/InputGrid" unique_id=577851887]
+layout_mode = 2
+text = "Mission Skill Difficulty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MissionDifficultyInput" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/InputGrid" unique_id=252483676]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/InputGrid" unique_id=605471505]
+layout_mode = 2
+text = "Single Skill Check"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SingleSkillCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer/InputGrid" unique_id=887048450]
+layout_mode = 2
+
+[node name="ButtonAddHero" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2085397775]
+layout_mode = 2
+text = "Add Hero"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=549581733]
+layout_mode = 2
+
+[node name="HBoxProbabilityContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=678605835]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="OutputGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxProbabilityContainer" unique_id=46728974]
+visible = false
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxProbabilityContainer/OutputGrid" unique_id=1083179171]
+custom_minimum_size = Vector2(10, 100)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0, 1, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxProbabilityContainer/OutputGrid/ColorRect" unique_id=61320252]
+show_behind_parent = true
+custom_minimum_size = Vector2(10, 50)
+layout_mode = 0
+offset_right = 42.0
+offset_bottom = 50.0
+color = Color(1, 0, 0, 1)
+
+[node name="SkillLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxProbabilityContainer/OutputGrid" unique_id=1036307098]
+layout_mode = 2
+text = "SkillA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DiffLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxProbabilityContainer/OutputGrid" unique_id=1470464551]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OutputLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxProbabilityContainer" unique_id=481756799]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mission Level:
+Defficit:
+Probability of Success:
+"
+
+[node name="HBoxSingleSkill" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1754189681]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="TutorialButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxSingleSkill" unique_id=1329569487]
+visible = false
+layout_mode = 2
+text = "Tutorial"
+
+[node name="skillTitleLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxSingleSkill" unique_id=1222857535]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Skill: %s"
+
+[node name="SkilDiffLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxSingleSkill" unique_id=1642829275]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Diff: #"
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxSingleSkill" unique_id=91271850]
+visible = false
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0.7882353, 0, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/checkbox_checked_color = Color(0, 1, 0, 1)
+theme_override_colors/checkbox_unchecked_color = Color(18.892157, 0, 0, 1)
+button_group = SubResource("ButtonGroup_fsoqw")
+icon = ExtResource("3_cgu46")
+
+[node name="VBoxSingleSkillChart" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxSingleSkill" unique_id=247917899]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxSingleSkillChart" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1579461854]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonStartRun" type="Button" parent="MarginContainer/VBoxContainer/HBoxSingleSkillChart" unique_id=709574607]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start Run"
+
+[node name="PauseMenuController" type="Control" parent="." unique_id=1606617306]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_cgu46")
+pause_menu_packed = ExtResource("5_b1j7a")

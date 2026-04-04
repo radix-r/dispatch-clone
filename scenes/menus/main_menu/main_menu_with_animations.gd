@@ -15,8 +15,22 @@ var animation_state_machine : AnimationNodeStateMachinePlayback
 @onready var new_game_confirmation = %NewGameConfirmation
 
 func load_game_scene() -> void:
-	GameState.start_game()
-    super.load_game_scene()
+    #GameState.start_game()
+    #super.load_game_scene()
+    # implement own load game scene?
+    # scene to load
+    var scene_to_load: String = GameState.get_current_level_path()
+    
+    if scene_to_load == "":
+        # new game
+        scene_to_load = get_game_scene_path()
+    
+    if signal_game_start:
+        SceneLoader.load_scene(scene_to_load, true)
+        game_started.emit()
+    else:
+        SceneLoader.load_scene(scene_to_load)
+        
 
 func new_game() -> void:
     if confirm_new_game and continue_game_button.visible:
@@ -65,6 +79,7 @@ func _ready() -> void:
     _show_level_select_if_set()
     _show_continue_if_set()
     animation_state_machine = $MenuAnimationTree.get("parameters/playback")
+    print_debug(GameState.get_current_level_path())
 
 func _on_continue_game_button_pressed() -> void:
     GameState.continue_game()
