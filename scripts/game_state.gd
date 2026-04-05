@@ -15,7 +15,7 @@ const FILE_PATH = "res://scripts/game_state.gd"
     set(value):
         active_run = value
         changed.emit() 
-
+@export var hero_starting_stats: HeroStartingStats = HeroStartingStats.new()
 # wtf do I want in the data model
 @export var num_successes: int = 0:
     set(value):
@@ -35,6 +35,7 @@ const FILE_PATH = "res://scripts/game_state.gd"
         changed.emit()
 
 # TODO: Heros, skills, speed, hp
+
 
 static func get_level_state(level_state_key : String) -> LevelState:
     if not has_game_state(): 
@@ -57,6 +58,10 @@ static func get_active_run() -> RunData:
     var game_state := get_or_create_state()
     return game_state.active_run
 
+static func get_all_heroes() -> Array[String]:
+    var game_state := get_or_create_state()
+    return game_state.hero_starting_stats.hero_starting_stats_dict.keys()
+
 
 static func get_or_create_state() -> GameState:
     return GlobalState.get_or_create_state(STATE_NAME, FILE_PATH)
@@ -73,11 +78,25 @@ static func get_checkpoint_level_path() -> String:
     var game_state := get_or_create_state()
     return game_state.checkpoint_level_path
 
+
+static func get_hero_start_data(hero_name: String) -> HeroData:
+    var game_state := get_or_create_state()
+    if game_state.hero_starting_stats.hero_starting_stats_dict.has(hero_name):
+        return game_state.hero_starting_stats.hero_starting_stats_dict[hero_name]
+    else:
+        push_error(hero_name, " not in hero starting data dict")
+        return null
+
 static func get_levels_reached() -> int:
     if not has_game_state(): 
         return 0
     var game_state := get_or_create_state()
     return game_state.level_states.size()
+
+static func get_unlocked_heroes() -> Array[String]:
+    var game_state := get_or_create_state()
+    # TODO filter on who is unlocked
+    return game_state.hero_starting_stats.hero_starting_stats_dict.keys()
 
 static func set_checkpoint_level_path(level_path : String) -> void:
     var game_state := get_or_create_state()

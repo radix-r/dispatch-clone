@@ -1,7 +1,8 @@
 class_name RunData
 extends Resource
 
-@export var heroes: Dictionary[String, HeroData] = {}
+## Heroes that can be deployable or in the safehouse
+@export var roster: Dictionary[String, HeroData] = {}
 
 @export var night: int = 0
 

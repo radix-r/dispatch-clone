@@ -145,13 +145,16 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OutputLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxProbabilityContainer" unique_id=481756799]
+[node name="OutputLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxProbabilityContainer" unique_id=1064491419]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
 text = "Mission Level:
 Defficit:
 Probability of Success:
 "
+fit_content = true
 
 [node name="HBoxSingleSkill" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1754189681]
 unique_name_in_owner = true
@@ -193,10 +196,10 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ButtonStartRun" type="Button" parent="MarginContainer/VBoxContainer/HBoxSingleSkillChart" unique_id=709574607]
+[node name="ButtonStartNight" type="Button" parent="MarginContainer/VBoxContainer/HBoxSingleSkillChart" unique_id=709574607]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Start Run"
+text = "Start Night"
 
 [node name="PauseMenuController" type="Control" parent="." unique_id=1606617306]
 anchors_preset = 0
