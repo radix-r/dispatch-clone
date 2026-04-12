@@ -1,0 +1,325 @@
+[gd_scene format=3 uid="uid://e587osvebowc"]
+
+[ext_resource type="Script" uid="uid://dtr82bfbf2if4" path="res://scripts/roster_element.gd" id="1_s7h8u"]
+[ext_resource type="Texture2D" uid="uid://qdunl8x8hwoc" path="res://assets/programmer/close.png" id="2_e2l2y"]
+
+[sub_resource type="Gradient" id="Gradient_e2l2y"]
+colors = PackedColorArray(0, 0, 0, 0.47058824, 0, 0, 0, 0.5058824)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cf5mi"]
+gradient = SubResource("Gradient_e2l2y")
+
+[node name="RosterElement" type="Control" unique_id=98525924]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_s7h8u")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=760507772]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="MarginContainer" unique_id=1974076632]
+unique_name_in_owner = true
+layout_mode = 2
+expand_icon = true
+
+[node name="CloseButton" type="Button" parent="." unique_id=105142582]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.0
+offset_bottom = 18.0
+grow_horizontal = 0
+theme_override_constants/icon_max_width = 10
+icon = ExtResource("2_e2l2y")
+flat = true
+icon_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1034413979]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -40.0
+offset_right = 128.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_cf5mi")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect" unique_id=372674481]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.5
+offset_top = -25.5
+offset_right = 100.5
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="TextureRect/MarginContainer" unique_id=752661832]
+layout_mode = 2
+columns = 5
+
+[node name="HeroDetailLabel" type="RichTextLabel" parent="TextureRect/MarginContainer/GridContainer" unique_id=995561940]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Test 123"
+
+[node name="SpinBox" type="SpinBox" parent="TextureRect/MarginContainer/GridContainer" unique_id=225922147]
+layout_mode = 2
+alignment = 1
+
+[node name="SpinBox2" type="SpinBox" parent="TextureRect/MarginContainer/GridContainer" unique_id=1338899422]
+layout_mode = 2
+alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1356596930]
+
+[node name="HeroDetailPanel" type="Panel" parent="CanvasLayer" unique_id=1553406998]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -365.0
+offset_top = -178.0
+offset_right = 365.0
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeroDetailContainer" type="VBoxContainer" parent="CanvasLayer/HeroDetailPanel" unique_id=387995748]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeroDisplayTitleLabel" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer" unique_id=347962918]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.28
+text = "Hero Stats"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer" unique_id=1290625409]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer" unique_id=318711698]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="BrainsLabel" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer" unique_id=65875998]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Brains"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer" unique_id=1886995100]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BrainsSpinBox" type="SpinBox" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer/HBoxContainer3" unique_id=1667794706]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="BrainsOriginalValueLabel" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer/HBoxContainer3" unique_id=1580472545]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharmLabel" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer" unique_id=488337436]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Charm"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer" unique_id=1511881729]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CharmSpinBox" type="SpinBox" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer/HBoxContainer4" unique_id=1134317786]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="CharmOriginalValueLabel" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer/HBoxContainer4" unique_id=752724024]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedLabel" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer" unique_id=667157904]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer" unique_id=2111487538]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SpeedSpinBox" type="SpinBox" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer/HBoxContainer" unique_id=1239965327]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="SpeedOriginalValueLabel" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer/HBoxContainer" unique_id=401069847]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpiritLabel" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer" unique_id=1373861338]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Spirit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer" unique_id=2006570491]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SpiritSpinBox" type="SpinBox" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer/HBoxContainer5" unique_id=975374900]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="SpiritOriginalValueLabel" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer/HBoxContainer5" unique_id=79785500]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StrengthLabel" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer" unique_id=1244362210]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Strength"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer" unique_id=634663017]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StrengthSpinBox" type="SpinBox" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer/HBoxContainer2" unique_id=1325003101]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="StrengthOriginalValueLabel" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer/HBoxContainer2" unique_id=633058019]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ToughnessLabel2" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer" unique_id=105849567]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Toughness"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer" unique_id=1816298480]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ToughnessSpinBox" type="SpinBox" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer/HBoxContainer6" unique_id=884591130]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="ToughnesssOriginalValueLabel" type="RichTextLabel" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/ScrollContainer/GridContainer/HBoxContainer6" unique_id=1895680201]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer" unique_id=1272037774]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+alignment = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/HeroDetailPanel/HeroDetailContainer/HBoxContainer" unique_id=530113216]
+layout_mode = 2
+text = "Confirm"
+
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="focus_exited" from="MarginContainer/Button" to="." method="_on_button_focus_exited"]
+[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HeroDetailPanel/HeroDetailContainer/HBoxContainer/Button" to="." method="_on_detail_confirm_button_pressed"]

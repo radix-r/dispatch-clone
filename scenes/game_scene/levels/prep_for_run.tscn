@@ -58,6 +58,7 @@ theme_override_constants/separation = 32
 script = ExtResource("2_mrjsh")
 
 [node name="InputGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/SelectionContainer" unique_id=1102215468]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
 columns = 2
@@ -101,57 +102,29 @@ vertical_alignment = 1
 [node name="SingleSkillCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/SelectionContainer/InputGrid" unique_id=887048450]
 layout_mode = 2
 
-[node name="ButtonAddHero" type="Button" parent="MarginContainer/VBoxContainer/SelectionContainer" unique_id=2085397775]
-layout_mode = 2
-text = "Add Hero"
-
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=549581733]
 layout_mode = 2
 
 [node name="RosterContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=678605835]
 unique_name_in_owner = true
+z_index = 1
 layout_mode = 2
-
-[node name="RosterGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/RosterContainer" unique_id=46728974]
-visible = false
-layout_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/RosterContainer/RosterGrid" unique_id=1083179171]
-custom_minimum_size = Vector2(10, 100)
-layout_mode = 2
-size_flags_vertical = 0
-color = Color(0, 1, 0, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer/RosterContainer/RosterGrid/ColorRect" unique_id=61320252]
-show_behind_parent = true
-custom_minimum_size = Vector2(10, 50)
-layout_mode = 0
-offset_right = 42.0
-offset_bottom = 50.0
-color = Color(1, 0, 0, 1)
-
-[node name="SkillLabel" type="Label" parent="MarginContainer/VBoxContainer/RosterContainer/RosterGrid" unique_id=1036307098]
-layout_mode = 2
-text = "SkillA"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DiffLabel" type="Label" parent="MarginContainer/VBoxContainer/RosterContainer/RosterGrid" unique_id=1470464551]
-layout_mode = 2
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="RosterLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/RosterContainer" unique_id=1564373450]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 bbcode_enabled = true
 text = "Mission Level:
 Defficit:
 Probability of Success:
 "
 fit_content = true
+
+[node name="RosterGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/RosterContainer" unique_id=46728974]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 5
 
 [node name="HBoxSingleSkill" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1754189681]
 unique_name_in_owner = true
