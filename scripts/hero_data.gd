@@ -5,8 +5,8 @@ extends Resource
 
 # Hard code skills?
 @export var name: String
-@export var max_hp: int
-@export var starting_hp: int
+#@export var max_hp: int
+#@export var starting_hp: int
 @export var current_hp: int
 @export var speed: int 
 @export var strength: int
@@ -19,8 +19,8 @@ extends Resource
 
 func _init(
         _name: String = "",
-        _max_hp: int = 0,
-        _starting_hp: int = 0,
+        #_max_hp: int = 0,
+        #_starting_hp: int = 0,
         _current_hp: int = 0,
         _speed: int = 0,
         _strength: int = 0,
@@ -29,8 +29,8 @@ func _init(
         _spirit: int = 0,
         _toughness: int = 0) -> void:
     name = _name
-    max_hp = _max_hp
-    starting_hp = _starting_hp
+    #max_hp = _max_hp
+    #starting_hp = _starting_hp
     current_hp = _current_hp
     speed = _speed
     strength = _strength

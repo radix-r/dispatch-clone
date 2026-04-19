@@ -81,8 +81,9 @@ static func get_checkpoint_level_path() -> String:
 
 static func get_hero_start_data(hero_name: String) -> HeroData:
     var game_state := get_or_create_state()
+    #game_state.hero_starting_stats.reset_stats()
     if game_state.hero_starting_stats.hero_starting_stats_dict.has(hero_name):
-        return game_state.hero_starting_stats.hero_starting_stats_dict[hero_name]
+        return game_state.hero_starting_stats.hero_starting_stats_dict[hero_name].duplicate()
     else:
         push_error(hero_name, " not in hero starting data dict")
         return null

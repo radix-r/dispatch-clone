@@ -113,6 +113,7 @@ alignment = 1
 
 [node name="HeroDetailPanel" type="Panel" parent="CanvasLayer" unique_id=1553406998]
 unique_name_in_owner = true
+visible = false
 z_index = 1
 custom_minimum_size = Vector2(100, 100)
 anchors_preset = 8
